@@ -1,8 +1,8 @@
 package ua.khpi.retail.dw.api;
 
-import java.io.Writer;
+import java.io.PrintWriter;
 
 public interface IPopulator {
 
-	public void populate(Writer writer);
+	public void populate(PrintWriter writer);
 }
