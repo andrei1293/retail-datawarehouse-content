@@ -9,13 +9,9 @@ public class ProductPopulator implements IPopulator {
 
 	public static int PRODUCT_NUMBER = 1000;
 
-	public static int MEASURE_FROM = 1;
+	public static int MEASURE_NUMBER = 5;
 
-	public static int MEASURE_TO = 5;
-
-	public static int CATEGORY_FROM = 1;
-
-	public static int CATEGORY_TO = 15;
+	public static int CATEGORY_NUMBER = 15;
 
 	@Override
 	public void populate(PrintWriter writer) {
@@ -23,8 +19,8 @@ public class ProductPopulator implements IPopulator {
 			int productID = i + 1;
 
 			String productName = String.format("Product-%s", productID);
-			String productMeasure = String.format("Measure-%s", IdRandomizer.getRandomId(MEASURE_FROM, MEASURE_TO));
-			String proudctCategory = String.format("Category-%s", IdRandomizer.getRandomId(CATEGORY_FROM, CATEGORY_TO));
+			String productMeasure = String.format("Measure-%s", IdRandomizer.getRandomId(1, MEASURE_NUMBER));
+			String proudctCategory = String.format("Category-%s", IdRandomizer.getRandomId(1, CATEGORY_NUMBER));
 
 			writer.printf(
 					"INSERT INTO Product (ProductID, ProductName, ProductMeasure, ProductCategory) "
