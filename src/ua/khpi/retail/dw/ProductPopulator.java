@@ -18,9 +18,9 @@ public class ProductPopulator implements IPopulator {
 		for (int i = 0; i < PRODUCT_NUMBER; i++) {
 			int productID = i + 1;
 
-			String productName = String.format("Product-%s", productID);
-			String productMeasure = String.format("Measure-%s", IdRandomizer.getRandomId(1, MEASURE_NUMBER));
-			String proudctCategory = String.format("Category-%s", IdRandomizer.getRandomId(1, CATEGORY_NUMBER));
+			String productName = String.format("Product-%d", productID);
+			String productMeasure = String.format("Measure-%d", IdRandomizer.getRandomId(1, MEASURE_NUMBER));
+			String proudctCategory = String.format("Category-%d", IdRandomizer.getRandomId(1, CATEGORY_NUMBER));
 
 			writer.printf(
 					"INSERT INTO Product (ProductID, ProductName, ProductMeasure, ProductCategory) "
