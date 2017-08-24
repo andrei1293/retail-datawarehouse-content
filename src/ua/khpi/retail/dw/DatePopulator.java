@@ -12,6 +12,10 @@ public class DatePopulator implements IPopulator {
 
 	public static final int DATE_SALE_NUMBER = 2000;
 
+	public static final int START_YEAR = 2011;
+
+	public static final int END_YEAR = 2016;
+
 	@Override
 	public void populate(PrintWriter writer) {
 		for (int i = 0; i < DATE_SUPPLY_NUMBER; i++) {
@@ -19,7 +23,7 @@ public class DatePopulator implements IPopulator {
 
 			int dayNumber = IdRandomizer.getRandomId(1, 28);
 			int monthNumber = IdRandomizer.getRandomId(1, 12);
-			int yearNumber = IdRandomizer.getRandomId(2011, 2016);
+			int yearNumber = IdRandomizer.getRandomId(START_YEAR, END_YEAR);
 
 			int quarterNumber = CalendarUtil.getQuarterNumber(monthNumber);
 
@@ -36,7 +40,7 @@ public class DatePopulator implements IPopulator {
 
 			int dayNumber = IdRandomizer.getRandomId(1, 28);
 			int monthNumber = IdRandomizer.getRandomId(1, 12);
-			int yearNumber = IdRandomizer.getRandomId(2011, 2016);
+			int yearNumber = IdRandomizer.getRandomId(START_YEAR, END_YEAR);
 
 			int quarterNumber = CalendarUtil.getQuarterNumber(monthNumber);
 
