@@ -48,6 +48,9 @@ public class SoldProductPopulator implements IPopulator {
 
 				if (productCounter == INCOMPLETE_SIZE) {
 					suppliedAmount = IdRandomizer.getRandomId(orderedAmount - 5, orderedAmount + 5);
+					productCounter = 1;
+				} else {
+					productCounter++;
 				}
 
 				int averagePrice = IdRandomizer.getRandomId(75, 500);
@@ -60,12 +63,6 @@ public class SoldProductPopulator implements IPopulator {
 								+ "VALUES (%d, %d, %d, %d, %d, %d, %d, %d, %d);\n",
 						dateID, customerID, productID, orderTime, expectedSupplyTime, realSupplyTime, orderedAmount,
 						suppliedAmount, totalCost);
-			}
-
-			if (productCounter == INCOMPLETE_SIZE) {
-				productCounter = 1;
-			} else {
-				productCounter++;
 			}
 		}
 	}
