@@ -48,7 +48,7 @@ public class DatePopulator implements IPopulator {
 
 			writer.printf(
 					"INSERT INTO SupplyDate (DateID, DayNumber, MonthNumber, MonthNameUKR, MonthNameENG, MothNameRUS,"
-							+ "QuarterNumber, YearNumber) VALUES (%d, %d, %d, '%s', '%s', '%s', %d, %d);\n",
+							+ "QuarterNumber, YearNumber) VALUES (%d, '%s', '%s', '%s');\n",
 					dateID, dayNumber, monthNumber, monthName, monthName, monthName, quarterNumber, yearNumber);
 		}
 	}
