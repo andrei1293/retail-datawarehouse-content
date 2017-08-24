@@ -20,6 +20,18 @@ public class SoldProductPopulator implements IPopulator {
 			int supplySize = IdRandomizer.getRandomId(1, 5);
 			int customerID = IdRandomizer.getRandomId(1, SupplierPopulator.SUPPLIER_NUMBER);
 
+			int orderTime = IdRandomizer.getRandomId(2, 48);
+
+			int expectedSupplyTime = IdRandomizer.getRandomId(2, 5);
+			int realSupplyTime = expectedSupplyTime;
+
+			if (dateCounter == INCOMPLETE_SCHEDULE) {
+				realSupplyTime = IdRandomizer.getRandomId(expectedSupplyTime, expectedSupplyTime + 2);
+				dateCounter = 1;
+			} else {
+				dateCounter++;
+			}
+
 			int suppliedProductID = 0;
 
 			for (int i = 0; i < supplySize; i++) {
@@ -30,15 +42,6 @@ public class SoldProductPopulator implements IPopulator {
 				}
 
 				suppliedProductID = productID;
-
-				int orderTime = IdRandomizer.getRandomId(2, 48);
-
-				int expectedSupplyTime = IdRandomizer.getRandomId(2, 5);
-				int realSupplyTime = expectedSupplyTime;
-
-				if (dateCounter == INCOMPLETE_SCHEDULE) {
-					realSupplyTime = IdRandomizer.getRandomId(expectedSupplyTime, expectedSupplyTime + 2);
-				}
 
 				int orderedAmount = 5 + IdRandomizer.getRandomId(5, 50);
 				int suppliedAmount = orderedAmount;
@@ -57,12 +60,6 @@ public class SoldProductPopulator implements IPopulator {
 								+ "VALUES (%d, %d, %d, %d, %d, %d, %d, %d, %d);\n",
 						dateID, customerID, productID, orderTime, expectedSupplyTime, realSupplyTime, orderedAmount,
 						suppliedAmount, totalCost);
-			}
-
-			if (dateCounter == INCOMPLETE_SCHEDULE) {
-				dateCounter = 1;
-			} else {
-				dateCounter++;
 			}
 
 			if (productCounter == INCOMPLETE_SIZE) {
