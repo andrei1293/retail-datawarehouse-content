@@ -5,7 +5,7 @@ import java.io.PrintWriter;
 import ua.khpi.retail.dw.api.IPopulator;
 import ua.khpi.retail.dw.util.IdRandomizer;
 
-public class SupplyOrderPopulator implements IPopulator {
+public class SaledProductPopulator implements IPopulator {
 
 	public static final int SUPPLY_ORDER_NUMBER = 200;
 	
