@@ -7,61 +7,68 @@ import ua.khpi.retail.dw.util.IdRandomizer;
 
 public class SuppliedProductPopulator implements IPopulator {
 
-	public static final int INCOMPLETE_ORDERS = 20;
+	public static final int INCOMPLETE_SCHEDULE = 15;
 
-	public static final int INCOMPLETE_UNITS = 10;
+	public static final int INCOMPLETE_SIZE = 200;
 
 	@Override
 	public void populate(PrintWriter writer) {
-		int incompleteOrder = SupplyOrderPopulator.SUPPLY_ORDER_NUMBER / INCOMPLETE_ORDERS;
+		int dateCounter = 1;
+		int productCounter = 0;
 
-		int orderCounter = 1;
+		for (int dateID = 1; dateID <= DatePopulator.DATE_SUPPLY_NUMBER; dateID++) {
+			int supplySize = IdRandomizer.getRandomId(5, 20);
+			int supplierID = IdRandomizer.getRandomId(1, SupplierPopulator.SUPPLIER_NUMBER);
 
-		for (int supplyOrderID = 1; supplyOrderID <= SupplyOrderPopulator.SUPPLY_ORDER_NUMBER; supplyOrderID++) {
-			int orderSize = IdRandomizer.getRandomId(10, 50);
+			int suppliedProductID = 0;
 
-			int incompleteUnit = orderSize / INCOMPLETE_UNITS;
-
-			int unitCounter = 1;
-
-			int previousProductID = 0;
-
-			for (int i = 0; i < orderSize; i++) {
+			for (int i = 0; i < supplySize; i++) {
 				int productID = IdRandomizer.getRandomId(1, ProductPopulator.PRODUCT_NUMBER);
 
-				while (productID == previousProductID) {
+				while (productID == suppliedProductID) {
 					productID = IdRandomizer.getRandomId(1, ProductPopulator.PRODUCT_NUMBER);
 				}
-				
-				previousProductID = productID;
 
-				int orderedAmount = 5 + IdRandomizer.getRandomId(0, 45);
-				int suppliedAmount = orderedAmount;
+				suppliedProductID = productID;
 
-				if (orderCounter == incompleteOrder) {
-					if (unitCounter == incompleteUnit) {
-						suppliedAmount = IdRandomizer.getRandomId(orderedAmount - 5, orderedAmount + 5);
+				int orderTime = IdRandomizer.getRandomId(2, 48);
 
-						unitCounter = 1;
-					} else {
-						unitCounter++;
-					}
+				int expectedSupplyTime = IdRandomizer.getRandomId(2, 5);
+				int realSupplyTime = expectedSupplyTime;
+
+				if (dateCounter == INCOMPLETE_SCHEDULE) {
+					realSupplyTime = IdRandomizer.getRandomId(expectedSupplyTime, expectedSupplyTime + 2);
 				}
 
-				int averageCost = IdRandomizer.getRandomId(50, 300);
+				int orderedAmount = 5 + IdRandomizer.getRandomId(5, 50);
+				int suppliedAmount = orderedAmount;
 
-				int totalCost = suppliedAmount * averageCost;
+				if (productCounter == INCOMPLETE_SIZE) {
+					suppliedAmount = IdRandomizer.getRandomId(orderedAmount - 5, orderedAmount + 5);
+				}
+
+				int averagePrice = IdRandomizer.getRandomId(50, 300);
+
+				int totalCost = orderedAmount * averagePrice;
 
 				writer.printf(
-						"INSERT INTO SuppliedProduct (SupplyOrderID, ProductID, OrderedAmount, SuppliedAmount, TotalCost) "
-								+ "VALUES (%d, %d, %d, %d, %d);\n",
-						supplyOrderID, productID, orderedAmount, suppliedAmount, totalCost);
+						"INSERT INTO SuppliedProduct (DateID, SupplierID, OrderTime, ExpectedSupplyTime,"
+								+ "RealSupplyTime, OrderedAmount, SuppliedAmount, TotalCost) "
+								+ "VALUES (%d, %d, %d, %d, %d, %d, %d, %d);\n",
+						dateID, supplierID, orderTime, expectedSupplyTime, realSupplyTime, orderedAmount,
+						suppliedAmount, totalCost);
 			}
 
-			if (orderCounter == incompleteOrder) {
-				orderCounter = 1;
+			if (dateCounter == INCOMPLETE_SCHEDULE) {
+				dateCounter = 1;
 			} else {
-				orderCounter++;
+				dateCounter++;
+			}
+
+			if (productCounter == INCOMPLETE_SIZE) {
+				productCounter = 1;
+			} else {
+				productCounter++;
 			}
 		}
 	}
