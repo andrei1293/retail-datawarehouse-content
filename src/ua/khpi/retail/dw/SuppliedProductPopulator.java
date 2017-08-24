@@ -14,7 +14,7 @@ public class SuppliedProductPopulator implements IPopulator {
 	@Override
 	public void populate(PrintWriter writer) {
 		int dateCounter = 1;
-		int productCounter = 0;
+		int productCounter = 1;
 
 		for (int dateID = 1; dateID <= DatePopulator.DATE_SUPPLY_NUMBER; dateID++) {
 			int supplySize = IdRandomizer.getRandomId(5, 20);
@@ -52,10 +52,10 @@ public class SuppliedProductPopulator implements IPopulator {
 				int totalCost = orderedAmount * averagePrice;
 
 				writer.printf(
-						"INSERT INTO SuppliedProduct (DateID, SupplierID, OrderTime, ExpectedSupplyTime,"
+						"INSERT INTO SuppliedProduct (DateID, SupplierID, ProductID, OrderTime, ExpectedSupplyTime,"
 								+ "RealSupplyTime, OrderedAmount, SuppliedAmount, TotalCost) "
-								+ "VALUES (%d, %d, %d, %d, %d, %d, %d, %d);\n",
-						dateID, supplierID, orderTime, expectedSupplyTime, realSupplyTime, orderedAmount,
+								+ "VALUES (%d, %d, %d, %d, %d, %d, %d, %d, %d);\n",
+						dateID, supplierID, productID, orderTime, expectedSupplyTime, realSupplyTime, orderedAmount,
 						suppliedAmount, totalCost);
 			}
 
