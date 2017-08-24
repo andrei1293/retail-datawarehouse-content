@@ -7,7 +7,7 @@ import ua.khpi.retail.dw.util.IdRandomizer;
 
 public class SupplierPopulator implements IPopulator {
 
-	public static int SUPPLIER_NUMBER = 20;
+	public static final int SUPPLIER_NUMBER = 20;
 
 	@Override
 	public void populate(PrintWriter writer) {

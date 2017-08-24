@@ -7,11 +7,11 @@ import ua.khpi.retail.dw.util.IdRandomizer;
 
 public class ProductPopulator implements IPopulator {
 
-	public static int PRODUCT_NUMBER = 1000;
+	public static final int PRODUCT_NUMBER = 1000;
 
-	public static int MEASURE_NUMBER = 5;
+	public static final int MEASURE_NUMBER = 5;
 
-	public static int CATEGORY_NUMBER = 15;
+	public static final int CATEGORY_NUMBER = 15;
 
 	@Override
 	public void populate(PrintWriter writer) {
