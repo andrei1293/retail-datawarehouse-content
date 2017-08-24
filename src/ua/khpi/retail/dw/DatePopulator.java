@@ -36,7 +36,7 @@ public class DatePopulator implements IPopulator {
 		}
 
 		for (int i = 0; i < DATE_SALE_NUMBER; i++) {
-			int dateID = DATE_SUPPLY_NUMBER + i;
+			int dateID = DATE_SUPPLY_NUMBER + i + 1;
 
 			int dayNumber = IdRandomizer.getRandomId(1, 28);
 			int monthNumber = IdRandomizer.getRandomId(1, 12);
